@@ -1,0 +1,76 @@
+/* Create table about the people and what they do here */
+CREATE TABLE authors (id INTEGER PRIMARY KEY,
+		    Name TEXT,
+		    Nationality TEXT,
+		    Number_of_books_written INTEGER);
+		
+
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("Stephen King", " American", 62);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("J.K. Rowling", " British", 47);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("Gillian Flynn", " American", 11);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("Khaled Hosseini", " Afghan-American", 18);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("Tana French", " American-Irish", 11);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("George R.R Martin", " American", 50);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("Ken Follett", " Welsh", 49);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("Sarah J. Maas", " American", 28);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("George Saunders", " American", 17);
+		INSERT INTO authors (Name, Nationality, Number_of_books_written)
+		    VALUES ("Erik Larson", " American", 17);
+		
+
+		
+
+		CREATE TABLE popular_books (id INTEGER PRIMARY KEY,
+		    Author_id INTEGER,
+		    Most_popular_book TEXT, 
+            Genre TEXT,
+		    Year_published INTEGER);
+
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (1, "The Shining", "horror", 1977);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (2, "Harry Potter", "fantasy", 1997);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (3, "Dark Places", "mystery", 2009);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (4, " The Kite Runner", "fiction", 2003);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (5, " In The Woods", "crime fiction", 2007);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (6, " Song of Ice and Fire", "fantasy", 1996);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (7, " Eye of the Needle", "fiction", 1978);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (8, "A Court of Thorns and Roses", "fantasy", 2015);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (9, " Lincoln in the Bardo ", "short stories", 2017);
+		INSERT INTO popular_books (Author_id, Most_popular_book, Genre, Year_published)
+		    VALUES (10, " Dead Wake: The Last Crossing of the Lusitania ", "nonfiction", 2015);
+		    
+/* cross join */
+SELECT * FROM popular_books, authors;
+
+/* implicit inner join */
+SELECT * FROM popular_books, authors
+    WHERE popular_books.Author_id = authors.id;
+
+/* explicit inner join - JOIN */
+SELECT authors.Name, authors.Nationality, authors.Number_of_books_written, popular_books.Most_popular_book, popular_books.Genre FROM authors
+    JOIN popular_books
+    ON authors.id = popular_books.Author_id
+    WHERE Genre = "fantasy";
+
+/* OUTER join */
+SELECT authors.Name, authors.Nationality, authors.Number_of_books_written, popular_books.Most_popular_book, popular_books.Year_published 
+    FROM authors
+    LEFT OUTER JOIN popular_books
+    ON authors.id = popular_books.Author_id;
